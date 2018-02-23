@@ -14,7 +14,7 @@ public class Main {
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
-        // [# of neurons] = [# of columns] * [5 Rows]
+        // [# of neurons] = [# of columns] * [# of Rows]
         System.out.println("> Enter number of Neurons (Must be divisible by 5");
         int size = Integer.valueOf(bufferedReader.readLine());
 
