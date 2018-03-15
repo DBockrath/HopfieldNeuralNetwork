@@ -6,7 +6,9 @@ import java.text.StringCharacterIterator;
 
 public class Main {
 
-    static final int NUMB_OF_ROWS_IN_DRAWING_BOARD = 5;
+    // Training numbers 5-9 have not been updated yet. Refer to numbers 0-4 to see the new format
+
+    static final int NUMB_OF_ROWS_IN_DRAWING_BOARD = 8; // Change this value to the number of rows in the input data before running
     enum Mode {DEFAULT, VERBOSE}
     static Main.Mode mode = Mode.DEFAULT;
 
@@ -15,7 +17,7 @@ public class Main {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
         // [# of neurons] = [# of columns] * [# of Rows]
-        System.out.println("> Enter number of Neurons (Must be divisible by 5");
+        System.out.println("> Enter number of Neurons (Must be divisible by " + NUMB_OF_ROWS_IN_DRAWING_BOARD + ")");
         int size = Integer.valueOf(bufferedReader.readLine());
 
         NeuralNetwork network = new NeuralNetwork(size);
@@ -26,6 +28,7 @@ public class Main {
 
         while (flag) {
 
+            String userText = null;
             System.out.println("> What do you want to do? (Train, Run, Clear, Change Mode, Exit)");
             String command = bufferedReader.readLine();
 
@@ -33,7 +36,8 @@ public class Main {
 
                 case "Train":
                     System.out.println("> Provide training pattern:");
-                    input = getInput(new StringCharacterIterator((bufferedReader.readLine())), size);
+                    userText = bufferedReader.readLine();
+                    input = getInput(userText);
                     network.train(input);
                     System.out.print(Matrix.getMatrix(input, NUMB_OF_ROWS_IN_DRAWING_BOARD).toPackedString());
                     System.out.println("> Training Finished");
@@ -41,7 +45,8 @@ public class Main {
 
                 case "Run":
                     System.out.println("> Enter input pattern:");
-                    input = getInput(new StringCharacterIterator(bufferedReader.readLine()), size);
+                    userText = bufferedReader.readLine();
+                    input = getInput(userText);
                     output = network.run(input);
 
                     System.out.println("> Input Pattern:");
@@ -72,18 +77,17 @@ public class Main {
 
     }
 
-    static double[] getInput(StringCharacterIterator iterator, int size) {
+    static double[] getInput(String input) {
 
-        double[] input = new double[size];
+        double[] returnData = new double[input.length()];
 
-        while (iterator.getIndex() < iterator.getEndIndex()) {
+        for (int i = 0; i < input.length(); i++) {
 
-            input[iterator.getIndex()] = Double.parseDouble(String.valueOf(iterator.current()));
-            iterator.next();
+            returnData[i] = Double.parseDouble(String.valueOf(input.charAt(i)));
 
         }
 
-        return input;
+        return returnData;
 
     }
 
