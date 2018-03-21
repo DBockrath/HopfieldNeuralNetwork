@@ -8,7 +8,7 @@ public class Main {
 
     // Training numbers 5-9 have not been updated yet. Refer to numbers 0-4 to see the new format
 
-    static final int NUMB_OF_ROWS_IN_DRAWING_BOARD = 8; // Change this value to the number of rows in the input data before running
+    static final int NUMB_OF_ROWS_IN_DRAWING_BOARD = 5; // Change this value to the number of rows in the input data before running
     enum Mode {DEFAULT, VERBOSE}
     static Main.Mode mode = Mode.DEFAULT;
 
